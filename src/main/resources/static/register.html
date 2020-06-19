@@ -1,0 +1,108 @@
+<html>
+<head>
+    <title>410聊天室注册</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet"
+          media="screen">
+    <link rel="stylesheet" type="text/css"
+          href="bootstrap/css/bootstrap-responsive.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/login.css" />
+    <script src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/jquery-1.4.min.js"></script>
+    <script type="text/javascript" src="js/login.js"></script>
+</head>
+<body>
+<div>
+    <form id="registerForm">
+        <div class="form-signin" id="login">
+            <h2 class="form-signin-heading" align="center">410聊天室注册</h2>
+            <div class="input-prepend">
+                <span class="add-on"><i class="icon-user"></i></span>
+                <input class="span2" type="text" name="username" id="username" placeholder="账号" >
+            </div><br>
+            <div class="input-prepend">
+                <span class="add-on"><i class="icon-lock"></i></span>
+                <input class="span2" type="password" name="password" id="password" placeholder="密码" >
+            </div>
+            <div style="position: relative;" id="div_errormsg"></div>
+            <div id="btns" style="...">
+                <!--            <button class="btn btn-large btn-primary" id="regbtn" onclick="register()">注册</button>-->
+                <!--            <div class="btn btn-large btn-primary"id="regbtn">-->
+                <input class="btn btn-large btn-primary"id="regbtn" type="button"  onclick="register()" value="注册">
+                <!--            </div>-->
+                <!--            <div class="right fr">您已有账号？<a href="login.html" target="_self">请登录</a></div>-->
+                <button class="btn btn-large btn-primary"> <a href="login.html" target="_self">去登录</a></button>
+            </div>
+
+        </div>
+    </form>
+</div>
+</body>
+<script type="text/javascript">
+
+    // //部署时未开发注册方法
+    // function register2() {
+    //     swal('未开放，请联系作者获得测试账号', {
+    //         icon: "error",
+    //     });
+    // }
+
+    //注册按钮onclick事件改为register()即可
+    function register() {
+        var loginName = $("#username").val();
+        // if (!validPhoneNumber(loginName)) {
+        //     swal('请输入正确的登录名(即手机号)', {
+        //         icon: "error",
+        //     });
+        //     return false;
+        // }
+        var password = $("#password").val();
+        // if (!validPassword(password)) {
+        //     swal('请输入正确的密码格式(6-20位字符和数字组合)', {
+        //         icon: "error",
+        //     });
+        //     return false;
+        // }
+        // var verifyCode = $("#verifyCode").val();
+        // if (!validLength(verifyCode, 7)) {
+        //     swal('请输入正确的验证码', {
+        //         icon: "error",
+        //     });
+        //     return false;
+        // }
+        //验证
+        var params = $("#registerForm").serialize();
+        var url = '/usr/register';
+        $.ajax({
+            type: 'POST',//方法类型
+            url: url,
+            data: params,
+            success: function (responseCode) {
+                if (responseCode.responseCode == 1) {
+                    alert("注册成功！")
+                    // alert({
+                    //     title:"注册成功",
+                    //     text: "是否跳转至登录页?",
+                    //     icon: "success",
+                    // })
+                } else {
+                    alert("注册失败！")
+                    // alert({
+                    //     title:"注册失败",
+                    //     text: "很遗憾注册失败，请重试！",
+                    //     icon: "error",
+                    // })
+                }
+                ;
+            },
+            error: function () {
+                alert("操作失败!");
+            }
+        });
+    }
+</script>
+</html>
